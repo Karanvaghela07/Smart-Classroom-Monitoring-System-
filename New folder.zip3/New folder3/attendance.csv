@@ -1,0 +1,122 @@
+StudentID,Name,Date,Time,MarkedBy
+-,Sandhya,2025-08-23,00:56:32,Camera
+-,Vaibhav,2025-08-23,00:56:38,Camera
+-,Vishal,2025-08-23,00:56:48,Camera
+-,Niti,2025-08-23,00:57:01,Camera
+-,Karan,2025-08-23,00:57:01,Camera
+-,Aditya,2025-08-23,00:57:01,Camera
+-,Sahil,2025-08-23,00:57:01,Camera
+-,Vinit,2025-08-23,00:57:09,Camera
+-,Shreyash,2025-08-23,00:57:09,Camera
+-,Krinal,2025-08-23,00:57:09,Camera
+-,Karan,2025-08-23,01:25:29,Camera
+-,Niti,2025-08-23,01:25:39,Camera
+-,Aditya,2025-08-23,01:25:39,Camera
+-,Sahil,2025-08-23,01:25:39,Camera
+-,Vinit,2025-08-23,01:25:44,Camera
+-,Shreyash,2025-08-23,01:25:44,Camera
+-,Krinal,2025-08-23,01:25:44,Camera
+-,Sandhya,2025-08-23,01:25:55,Camera
+-,Vaibhav,2025-08-23,01:26:01,Camera
+-,Vishal,2025-08-23,01:26:07,Camera
+-,Karan,2025-08-28,12:00:58,Camera
+-,Aditya,2025-08-28,12:01:06,Camera
+-,Niti,2025-08-28,12:01:10,Camera
+-,Sahil,2025-08-28,12:01:10,Camera
+-,Vinit,2025-08-28,12:01:14,Camera
+-,Shreyash,2025-08-28,12:01:14,Camera
+-,Krinal,2025-08-28,12:01:14,Camera
+-,Karan,2025-08-28,12:49:32,Camera
+-,Vinit,2025-08-28,13:38:33,Camera
+-,Niti,2025-08-28,13:38:33,Camera
+-,Karan,2025-08-28,13:38:55,Camera
+-,Aditya,2025-08-28,13:38:55,Camera
+-,Shreyash,2025-08-28,13:38:55,Camera
+-,Sahil,2025-08-28,13:38:55,Camera
+-,Krinal,2025-08-28,13:39:01,Camera
+-,Vinit,2025-08-28,20:32:39,Camera
+-,Karan,2025-08-28,20:37:32,Camera
+-,Karan,2025-08-28,23:12:00,Camera
+-,Karan,2025-08-28,23:21:23,Camera
+-,Karan,2025-08-29,00:22:44,Camera
+-,Niti,2025-08-29,00:23:22,Camera
+-,Sahil,2025-08-29,00:23:22,Camera
+-,Aditya,2025-08-29,00:23:22,Camera
+-,Vinit,2025-08-29,00:23:30,Camera
+-,Shreyash,2025-08-29,00:23:30,Camera
+-,Krinal,2025-08-29,00:23:30,Camera
+-,Vishal,2025-08-29,00:47:40,Camera
+-,Vaibhav,2025-08-29,00:47:46,Camera
+-,Sandhya,2025-08-29,00:47:52,Camera
+-,Aditya,2025-08-29,12:30:59,Camera
+-,Niti,2025-08-29,12:31:05,Camera
+-,Karan,2025-08-29,13:39:36,Camera
+-,Sahil,2025-08-29,13:39:36,Camera
+-,Karan,2025-08-31,22:17:32,Camera
+-,Harsh Chavda,2025-08-31,23:01:30,Camera
+-,Raj Vasava,2025-08-31,23:05:08,Camera
+-,Subham Chaudhary,2025-08-31,23:09:38,Camera
+-,Karan,2025-08-31,23:13:47,Camera
+-,Karan,2025-08-31,23:43:24,Camera
+-,Sagar Gupta,2025-08-31,23:49:57,Camera
+-,Karan,2025-09-08,00:53:17,Camera
+-,Sagar Gupta,2025-09-08,00:57:33,Camera
+-,Subham Chaudhary,2025-09-08,00:58:13,Camera
+-,Raj Vasava,2025-09-08,00:58:19,Camera
+-,Vishal,2025-09-08,01:01:03,Camera
+-,Vaibhav,2025-09-08,01:01:09,Camera
+-,Sandhya,2025-09-08,01:01:17,Camera
+-,Sahil,2025-09-08,01:01:51,Camera
+-,Shreyash,2025-09-08,01:02:09,Camera
+-,Vinit,2025-09-08,01:02:15,Camera
+-,Niti,2025-09-08,01:02:35,Camera
+-,Aditya,2025-09-08,01:02:45,Camera
+-,Krinal,2025-09-08,01:03:39,Camera
+-,Harsh Chavda,2025-09-08,01:04:20,Camera
+-,Harsh Patil,2025-09-08,01:07:12,Camera
+-,Aryan Kumar,2025-09-08,01:10:28,Camera
+-,Vinit,2025-09-08,01:17:27,Camera
+-,Aryan Kumar,2025-09-08,01:17:33,Camera
+-,Karan,2025-09-08,01:17:38,Camera
+-,Harsh Patil,2025-09-08,01:19:15,Camera
+-,Sahil,2025-09-09,11:34:38,Camera
+-,Karan,2025-09-09,11:34:38,Camera
+-,Kunj Shah,2025-09-09,11:34:40,Camera
+-,Sagar Gupta,2025-09-09,11:35:21,Camera
+-,Subham Chaudhary,2025-09-09,11:35:32,Camera
+-,Harsh Patil,2025-09-09,12:42:33,Camera
+-,Karan,2025-09-09,12:44:28,Camera
+-,Vinit,2025-09-09,12:44:41,Camera
+STU0018,John,2025-09-09,12:45:01,Camera
+-,Karan,2025-09-09,20:09:28,Camera
+-,Vinit,2025-09-09,23:19:25,Camera
+STU0018,John,2025-09-09,23:19:34,Camera
+-,Karan,2025-09-09,23:19:41,Camera
+-,Karan,2025-09-21,14:00:08,Camera
+-,Aryan Kumar,2025-09-21,14:01:07,Camera
+-,Sandhya,2025-09-21,14:02:15,Camera
+-,Krinal,2025-09-21,14:02:38,Camera
+-,Karan,2025-09-23,17:53:43,Camera
+-,Harsh Patil,2025-09-23,17:54:01,Camera
+-,Aditya,2025-09-23,17:54:07,Camera
+-,Aditya,2025-09-23,18:13:03,Camera
+-,Karan,2025-09-23,18:13:15,Camera
+STU019,Asheesh,2025-09-23,18:17:01,Camera
+-,Karan,2025-09-23,18:17:49,Camera
+STU019,Asheesh,2025-09-23,18:24:50,Camera
+STU019,Asheesh,2025-09-23,18:59:18,Camera
+-,Karan,2025-09-23,18:59:30,Camera
+STU020,Dhruv,2025-09-24,09:48:33,Camera
+STU019,Asheesh,2025-09-24,10:29:26,Camera
+-,Aditya,2025-09-24,10:29:26,Camera
+STU020,Dhruv,2025-09-24,10:29:26,Camera
+-,Aryan Kumar,2025-09-24,10:29:35,Camera
+STU019,Asheesh,2025-09-24,10:45:50,Camera
+STU019,Asheesh,2025-09-24,12:11:32,Camera
+-,Sagar Gupta,2025-09-26,12:39:53,Camera
+STU019,Asheesh,2025-09-26,12:39:53,Camera
+-,Vinit,2025-09-26,12:40:01,Camera
+STU019,Asheesh,2025-09-26,16:14:17,Camera
+STU019,Asheesh,2025-10-07,21:48:51,Camera
+-,Karan,2025-10-07,21:49:14,Camera
+-,Karan,2025-10-30,18:11:49,Camera

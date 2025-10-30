@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition Attendance System</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dark-theme">
+    <!-- Quick Access Controls -->
+    <div class="theme-controls">
+        <button id="settings-toggle" class="theme-btn" onclick="window.location.href='settings.html'">
+            <i class="fas fa-cog"></i>
+        </button>
+        <button id="info-toggle" class="theme-btn" onclick="window.location.href='about.html'">
+            <i class="fas fa-info-circle"></i>
+        </button>
+        <button id="help-toggle" class="theme-btn">
+            <i class="fas fa-question-circle"></i>
+        </button>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-icon">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <div class="brand-text">
+                    <h1 class="nav-title">Attendance System</h1>
+                </div>
+            </div>
+            
+            <div class="nav-menu-wrapper">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link active">
+                            <i class="fas fa-home"></i>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="recognition.html" class="nav-link">
+                            <i class="fas fa-camera"></i>
+                            <span class="nav-text">Recognition</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="history.html" class="nav-link">
+                            <i class="fas fa-history"></i>
+                            <span class="nav-text">History</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="students.html" class="nav-link">
+                            <i class="fas fa-users"></i>
+                            <span class="nav-text">Students</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="reports.html" class="nav-link">
+                            <i class="fas fa-chart-bar"></i>
+                            <span class="nav-text">Reports</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="settings.html" class="nav-link">
+                            <i class="fas fa-cog"></i>
+                            <span class="nav-text">Settings</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">
+                            <i class="fas fa-info-circle"></i>
+                            <span class="nav-text">About</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" id="logout-btn" class="nav-link">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span class="nav-text">Logout</span>
+                        </a>
+                    </li>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', () => {
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const confirmed = confirm('Are you sure you want to logout?');
+            if (confirmed) {
+                // Clear any session/local storage or tokens if needed here
+                // For example: localStorage.clear();
+
+                // Redirect to login page
+                window.location.href = 'login.html';
+            }
+        });
+    }
+});
+
+                    </script>
+                </ul>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <div class="mobile-menu-toggle">
+                <button class="mobile-toggle-btn" id="mobile-menu-btn">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="dashboard">
+            <!-- Welcome Header -->
+            <div class="welcome-header">
+                <h1 class="gradient-text">Welcome to Face Recognition Attendance System</h1>
+                <p id="welcome-message">Good morning, Administrator! Welcome to your dashboard.</p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card purple animate-card" data-delay="0">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="total-students">4</h3>
+                        <p>Total Students</p>
+                    </div>
+                    <div class="stat-glow purple-glow"></div>
+                </div>
+                <div class="stat-card green animate-card" data-delay="100">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="today-attendance">0</h3>
+                        <p>Present Today</p>
+                    </div>
+                    <div class="stat-glow green-glow"></div>
+                </div>
+                <div class="stat-card orange animate-card" data-delay="200">
+                    <div class="stat-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="attendance-rate">0%</h3>
+                        <p>Attendance Rate</p>
+                    </div>
+                    <div class="stat-glow orange-glow"></div>
+                </div>
+                <div class="stat-card blue animate-card" data-delay="300">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-day"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="current-date">Aug 14</h3>
+                        <p>Today's Date</p>
+                    </div>
+                    <div class="stat-glow blue-glow"></div>
+                </div>
+            </div>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Recent Attendance -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-clock"></i> Recent Attendance</h3>
+                        <button class="view-all-btn" onclick="window.location.href='history.html'">View All</button>
+                    </div>
+                    <div class="card-content">
+                        <div id="recent-attendance-list" class="attendance-list">
+                            <div class="no-data">
+                                <i class="fas fa-clipboard-list"></i>
+                                <p>No attendance recorded today</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weekly Overview Chart -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-line"></i> Weekly Overview</h3>
+                    </div>
+                    <div class="card-content">
+                        <canvas id="weeklyChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="quick-actions-grid">
+                            <button class="action-btn primary" onclick="window.location.href='recognition.html'">
+                                <i class="fas fa-camera"></i>
+                                <span>Take Attendance</span>
+                            </button>
+                            <button class="action-btn secondary" onclick="window.location.href='history.html'">
+                                <i class="fas fa-search"></i>
+                                <span>View Records</span>
+                            </button>
+                            <button class="action-btn success" id="download-csv">
+                                <i class="fas fa-download"></i>
+                                <span>Export Data</span>
+                            </button>
+                            <button class="action-btn info" onclick="window.location.href='settings.html'">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-bell"></i> Notifications</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="notifications-list">
+                            <div class="notification-item success">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Face recognition system is online and ready</span>
+                            </div>
+                            <div class="notification-item warning" id="attendance-warning">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <span>Low attendance rate today: 0%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="loading" class="loading-spinner" style="display: none;">
+        <div class="spinner"></div>
+        <p>Loading AI Model...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

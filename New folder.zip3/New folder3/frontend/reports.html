@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Attendance System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="reports.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dark-theme">
+    <!-- Theme Toggle -->
+    <div class="theme-controls">
+        <button id="theme-toggle" class="theme-btn">
+            <i class="fas fa-sun"></i>
+        </button>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-user-check"></i>
+                <h1 class="nav-title">Attendance System</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="recognition.html" class="nav-link"><i class="fas fa-camera"></i> Recognition</a></li>
+                <li><a href="history.html" class="nav-link"><i class="fas fa-history"></i> History</a></li>
+                <li><a href="students.html" class="nav-link"><i class="fas fa-users"></i> Students</a></li>
+                <li><a href="reports.html" class="nav-link active"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                <li><a href="settings.html" class="nav-link"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="about.html" class="nav-link"><i class="fas fa-info-circle"></i> About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="reports-page">
+            <!-- Page Header -->
+            <div class="page-header-reports">
+                <h1>Attendance Reports & Analytics</h1>
+                <p>Comprehensive insights and detailed reports for attendance management</p>
+            </div>
+
+            <!-- Report Controls -->
+            <div class="report-controls">
+                <div class="controls-section">
+                    <div class="date-range-picker">
+                        <label>Date Range</label>
+                        <div class="date-inputs">
+                            <input type="date" id="start-date" class="date-input">
+                            <span>to</span>
+                            <input type="date" id="end-date" class="date-input">
+                        </div>
+                    </div>
+                    
+                    <div class="quick-filters">
+                        <label>Quick Filters</label>
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-period="today">Today</button>
+                            <button class="filter-btn" data-period="week">This Week</button>
+                            <button class="filter-btn" data-period="month">This Month</button>
+                            <button class="filter-btn" data-period="year">This Year</button>
+                        </div>
+                    </div>
+                    
+                    <div class="student-filter">
+                        <label>Student Filter</label>
+                        <select id="student-select" class="filter-select">
+                            <option value="">All Students</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="action-btn secondary" id="refresh-reports">
+                        <i class="fas fa-sync-alt"></i>
+                        Refresh
+                    </button>
+                    <button class="action-btn primary" id="export-report">
+                        <i class="fas fa-download"></i>
+                        Export Report
+                    </button>
+                </div>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <div class="card-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 id="total-students-summary">0</h3>
+                        <p>Total Students</p>
+                        <span class="card-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            +5% from last period
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="card-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 id="total-attendance-summary">0</h3>
+                        <p>Total Attendance</p>
+                        <span class="card-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            +12% from last period
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="card-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 id="avg-attendance-rate">0%</h3>
+                        <p>Average Attendance Rate</p>
+                        <span class="card-trend negative">
+                            <i class="fas fa-arrow-down"></i>
+                            -2% from last period
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="card-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 id="avg-arrival-time">9:15 AM</h3>
+                        <p>Average Arrival Time</p>
+                        <span class="card-trend neutral">
+                            <i class="fas fa-minus"></i>
+                            No change
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-section">
+                <!-- Attendance Trends Chart -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-chart-line"></i> Attendance Trends</h3>
+                        <div class="chart-controls">
+                            <button class="chart-btn active" data-chart="line">Line</button>
+                            <button class="chart-btn" data-chart="bar">Bar</button>
+                            <button class="chart-btn" data-chart="area">Area</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="trendsChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Attendance Distribution -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-chart-pie"></i> Attendance Distribution</h3>
+                        <div class="chart-legend" id="distribution-legend"></div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="distributionChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Daily Patterns -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-chart-bar"></i> Daily Patterns</h3>
+                        <select class="chart-select" id="pattern-select">
+                            <option value="hourly">Hourly Distribution</option>
+                            <option value="daily">Daily Average</option>
+                            <option value="weekly">Weekly Pattern</option>
+                        </select>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="patternsChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Student Performance -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-user-graduate"></i> Student Performance</h3>
+                        <div class="performance-filters">
+                            <button class="perf-btn active" data-sort="attendance">By Attendance</button>
+                            <button class="perf-btn" data-sort="punctuality">By Punctuality</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Reports Section -->
+            <div class="detailed-reports">
+                <div class="reports-tabs">
+                    <button class="tab-btn active" data-tab="summary">Summary Report</button>
+                    <button class="tab-btn" data-tab="individual">Individual Reports</button>
+                    <button class="tab-btn" data-tab="comparative">Comparative Analysis</button>
+                    <button class="tab-btn" data-tab="trends">Trend Analysis</button>
+                </div>
+
+                <!-- Summary Report Tab -->
+                <div id="summary-tab" class="report-tab active">
+                    <div class="report-card">
+                        <div class="report-header">
+                            <h3><i class="fas fa-file-alt"></i> Summary Report</h3>
+                            <button class="export-btn" data-format="pdf">
+                                <i class="fas fa-file-pdf"></i>
+                                Export PDF
+                            </button>
+                        </div>
+                        <div class="report-content">
+                            <div class="summary-table">
+                                <table class="report-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Metric</th>
+                                            <th>Current Period</th>
+                                            <th>Previous Period</th>
+                                            <th>Change</th>
+                                            <th>Trend</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="summary-table-body">
+                                        <!-- Data will be populated here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Individual Reports Tab -->
+                <div id="individual-tab" class="report-tab">
+                    <div class="report-card">
+                        <div class="report-header">
+                            <h3><i class="fas fa-user"></i> Individual Student Reports</h3>
+                            <div class="individual-controls">
+                                <select id="individual-student-select" class="report-select">
+                                    <option value="">Select Student</option>
+                                </select>
+                                <button class="export-btn" data-format="excel">
+                                    <i class="fas fa-file-excel"></i>
+                                    Export Excel
+                                </button>
+                            </div>
+                        </div>
+                        <div class="report-content">
+                            <div id="individual-report-content">
+                                <div class="no-selection">
+                                    <i class="fas fa-user-circle"></i>
+                                    <p>Select a student to view their detailed report</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparative Analysis Tab -->
+                <div id="comparative-tab" class="report-tab">
+                    <div class="report-card">
+                        <div class="report-header">
+                            <h3><i class="fas fa-balance-scale"></i> Comparative Analysis</h3>
+                            <button class="export-btn" data-format="csv">
+                                <i class="fas fa-file-csv"></i>
+                                Export CSV
+                            </button>
+                        </div>
+                        <div class="report-content">
+                            <div class="comparative-charts">
+                                <div class="comparison-chart">
+                                    <h4>Class vs Individual Performance</h4>
+                                    <canvas id="comparisonChart"></canvas>
+                                </div>
+                                <div class="ranking-table">
+                                    <h4>Student Rankings</h4>
+                                    <div class="ranking-list" id="student-rankings">
+                                        <!-- Rankings will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trend Analysis Tab -->
+                <div id="trends-tab" class="report-tab">
+                    <div class="report-card">
+                        <div class="report-header">
+                            <h3><i class="fas fa-chart-line"></i> Trend Analysis</h3>
+                            <div class="trend-controls">
+                                <select id="trend-period" class="report-select">
+                                    <option value="daily">Daily Trends</option>
+                                    <option value="weekly">Weekly Trends</option>
+                                    <option value="monthly">Monthly Trends</option>
+                                </select>
+                                <button class="export-btn" data-format="png">
+                                    <i class="fas fa-image"></i>
+                                    Export Chart
+                                </button>
+                            </div>
+                        </div>
+                        <div class="report-content">
+                            <div class="trend-analysis">
+                                <div class="trend-chart">
+                                    <canvas id="trendAnalysisChart"></canvas>
+                                </div>
+                                <div class="trend-insights">
+                                    <h4>Key Insights</h4>
+                                    <div class="insights-list" id="trend-insights">
+                                        <!-- Insights will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="loading" class="loading-spinner" style="display: none;">
+        <div class="spinner"></div>
+        <p>Generating Reports...</p>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="reports.js"></script>
+</body>
+</html>

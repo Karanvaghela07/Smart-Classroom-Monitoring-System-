@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance History - Attendance System</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<style>
+    /* Attendance History Page Enhancements
+   Keeps same dark theme as style.css
+*/
+
+/* Container */
+.container {
+  margin-top: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  animation: fadeIn 0.6s ease;
+}
+
+/* Heading */
+.container h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--accent-color, #ff4081);
+  text-align: center;
+  border-bottom: 2px solid rgba(255,255,255,0.1);
+  padding-bottom: 0.5rem;
+}
+
+/* Filter Section */
+.filter-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.filter-section label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.filter-section .form-input {
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+}
+
+.filter-section .btn {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.filter-section .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.2);
+}
+
+.table thead {
+  background: rgba(255,255,255,0.08);
+}
+
+.table th, .table td {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.table th {
+  color: var(--accent-color, #ff4081);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.table tr:nth-child(even) {
+  background: rgba(255,255,255,0.03);
+}
+
+.table tbody tr:hover {
+  background: rgba(255,255,255,0.08);
+  transition: background 0.2s ease;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.2rem;
+}
+
+.pagination .btn {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.07);
+  color: #fff;
+  transition: all 0.2s ease;
+}
+
+.pagination .btn:hover {
+  background: var(--accent-color, #ff4081);
+  color: #fff;
+}
+
+.pagination .btn[data-active="true"] {
+  background: var(--accent-color, #ff4081);
+  font-weight: bold;
+  box-shadow: 0 0 8px rgba(255,64,129,0.5);
+}
+
+.pagination span {
+  color: rgba(255,255,255,0.6);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+</style>
+<body class="dark-theme">
+    <!-- Quick Access Controls -->
+    <div class="theme-controls">
+        <button id="settings-toggle" class="theme-btn" onclick="window.location.href='settings.html'">
+            <i class="fas fa-cog"></i>
+        </button>
+        <button id="info-toggle" class="theme-btn" onclick="window.location.href='about.html'">
+            <i class="fas fa-info-circle"></i>
+        </button>
+        <button id="help-toggle" class="theme-btn">
+            <i class="fas fa-question-circle"></i>
+        </button>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-user-check"></i>
+                <h1 class="nav-title">Attendance System</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="recognition.html" class="nav-link"><i class="fas fa-camera"></i> Recognition</a></li>
+                <li><a href="history.html" class="nav-link active"><i class="fas fa-history"></i> History</a></li>
+                <li><a href="students.html" class="nav-link"><i class="fas fa-users"></i> Students</a></li>
+                <li><a href="reports.html" class="nav-link"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                <li><a href="settings.html" class="nav-link"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="about.html" class="nav-link"><i class="fas fa-info-circle"></i> About</a></li>
+            </ul>
+            </ul>
+        </div>
+    </nav>
+
+     <div class="container">
+        <h1>Attendance History</h1>
+
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <label for="date-filter">Filter by Date:</label>
+            <input type="date" id="date-filter" class="form-input">
+            <button id="filter-btn" class="btn">Apply</button>
+            <button id="reset-btn" class="btn">Reset</button>
+        </div>
+
+        <!-- Attendance Table -->
+        <table id="attendance-table" class="table">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Marked By</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Records will load here dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const tableBody = document.querySelector("#attendance-table tbody");
+    const dateFilter = document.getElementById("date-filter");
+    const filterBtn = document.getElementById("filter-btn");
+    const resetBtn = document.getElementById("reset-btn");
+
+    let attendanceData = [];
+    let currentPage = 1;
+    const rowsPerPage = 10;
+
+    // Normalize keys (so StudentID => student_id)
+    function normalizeRecord(record) {
+        return {
+        name: record.Name || record.name || "-",
+        date: record.Date || record.date || "-",
+        time: record.Time || record.time || "",
+        marked_by: record.MarkedBy || record.marked_by || "-"
+        };
+    }
+
+    // Fetch attendance
+    async function fetchAttendance() {
+        try {
+        const response = await fetch("http://127.0.0.1:7000/attendance/history");
+        if (!response.ok) throw new Error("Failed to fetch");
+        const data = await response.json();
+        attendanceData = Array.isArray(data) ? data.map(normalizeRecord) : [];
+        currentPage = 1;
+        renderTable(attendanceData, currentPage);
+        renderPagination(attendanceData);
+        } catch (error) {
+        console.error("Error fetching attendance:", error);
+        attendanceData = [];
+        renderTable(attendanceData, 1);
+        renderPagination(attendanceData);
+        }
+    }
+
+    // Render table with pagination
+    function renderTable(data, page = 1) {
+        tableBody.innerHTML = "";
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+        const pageData = data.slice(start, end);
+
+        if (pageData.length === 0) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td colspan="4" style="text-align:center; opacity:.8;">No records found</td>`;
+        tableBody.appendChild(tr);
+        return;
+        }
+
+        pageData.forEach(record => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${record.name}</td>
+            <td>${record.date}</td>
+            <td>${record.time}</td>
+            <td>${record.marked_by}</td>
+        `;
+        tableBody.appendChild(tr);
+        });
+    }
+
+    // Render pagination controls
+    function renderPagination(data) {
+        const totalPages = Math.ceil(data.length / rowsPerPage) || 1;
+        let paginationDiv = document.getElementById("pagination");
+
+        if (!paginationDiv) {
+        paginationDiv = document.createElement("div");
+        paginationDiv.id = "pagination";
+        paginationDiv.className = "pagination";
+        document.querySelector(".container").appendChild(paginationDiv);
+        }
+
+        paginationDiv.innerHTML = "";
+
+        for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement("button");
+        btn.textContent = i;
+        btn.className = "btn";
+        btn.dataset.active = i === currentPage ? "true" : "false";
+        btn.addEventListener("click", () => {
+            currentPage = i;
+            renderTable(attendanceData, currentPage);
+            renderPagination(attendanceData);
+        });
+        paginationDiv.appendChild(btn);
+        }
+    }
+
+    // Filter by date
+    filterBtn.addEventListener("click", () => {
+        const selectedDate = dateFilter.value;
+        if (!selectedDate) {
+        alert("Please select a date");
+        return;
+        }
+        const filtered = attendanceData.filter(r => r.date === selectedDate);
+        currentPage = 1;
+        renderTable(filtered, currentPage);
+        renderPagination(filtered);
+    });
+
+    // Reset filter
+    resetBtn.addEventListener("click", () => {
+        dateFilter.value = "";
+        currentPage = 1;
+        renderTable(attendanceData, currentPage);
+        renderPagination(attendanceData);
+    });
+
+    // Initial load
+    fetchAttendance();
+    });
+</script>
+
+    <script src="script.js"></script>
+    
+</body>
+</html>

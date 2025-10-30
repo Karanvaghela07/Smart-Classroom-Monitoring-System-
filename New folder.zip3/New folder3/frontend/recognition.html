@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition - Attendance System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="recognition.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="dark-theme">
+    <!-- Theme Toggle -->
+    <div class="theme-controls">
+        <button id="theme-toggle" class="theme-btn">
+            <i class="fas fa-sun"></i>
+        </button>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-icon">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <div class="brand-text">
+                    <h1 class="nav-title">Attendance System</h1>
+                </div>
+            </div>
+
+            <div class="nav-menu-wrapper">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="recognition.html" class="nav-link active">
+                            <i class="fas fa-camera"></i>
+                            <span class="nav-text">Recognition</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="history.html" class="nav-link">
+                            <i class="fas fa-history"></i>
+                            <span class="nav-text">History</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="students.html" class="nav-link">
+                            <i class="fas fa-users"></i>
+                            <span class="nav-text">Students</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="reports.html" class="nav-link">
+                            <i class="fas fa-chart-bar"></i>
+                            <span class="nav-text">Reports</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="settings.html" class="nav-link">
+                            <i class="fas fa-cog"></i>
+                            <span class="nav-text">Settings</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">
+                            <i class="fas fa-info-circle"></i>
+                            <span class="nav-text">About</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <div class="mobile-menu-toggle">
+                <button class="mobile-toggle-btn" id="mobile-menu-btn">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="recognition-page">
+            <!-- Page Header -->
+            <div class="page-header-recognition animate-fade-in" data-delay="0">
+                <h1 class="gradient-text">Face Recognition Attendance</h1>
+                <p>Position your face in the camera frame for automatic attendance marking</p>
+            </div>
+
+            <div class="recognition-layout">
+                <!-- Camera Section -->
+                <div class="camera-container">
+                    <video id="video" autoplay muted playsinline></video>
+                    <canvas id="canvas" style="display: none;"></canvas>
+                    <div class="camera-overlay">
+                        <div class="recognition-indicator animate-pulse" id="recognition-indicator">
+                            <i class="fas fa-user-slash"></i>
+                            <span>No face detected</span>
+                        </div>
+                        <div class="scanning-line" id="scanning-line" style="display: none;"></div>
+                    </div>
+                </div>
+
+                <div class="camera-controls animate-slide-up" data-delay="400">
+                    <button id="start-camera" class="control-btn primary pulse-btn">
+                        <i class="fas fa-play"></i>
+                        <span>Start Camera</span>
+                    </button>
+                    <button id="capture" class="control-btn success" style="display: none;">
+                        <i class="fas fa-camera"></i>
+                        <span>Capture & Recognize</span>
+                    </button>
+                    <button id="stop-camera" class="control-btn danger" style="display: none;">
+                        <i class="fas fa-stop"></i>
+                        <span>Stop Camera</span>
+                    </button>
+                    <button id="upload-photo" class="control-btn secondary">
+                        <i class="fas fa-upload"></i>
+                        <span>Upload Photo</span>
+                    </button>
+                </div>
+
+                <input type="file" id="photo-upload" accept="image/*" style="display: none;">
+            </div>
+
+            <!-- Right Panel -->
+            
+        </div>
+        <style>
+            .recognition-panel {
+                display: flex;
+                width: 100%;
+            }
+        </style>
+        <!-- Today's Attendance -->
+        <div class="attendance-card animate-card" data-delay="600">
+            <div class="card-header">
+                <h3><i class="fas fa-list animate-spin-slow"></i> Today's Attendance</h3>
+                <span class="attendance-count animate-counter" id="attendance-count">0 marked</span>
+            </div>
+            <div class="card-content">
+                <div id="today-attendance-list" class="attendance-list">
+                    <div class="no-data animate-float"></div>
+                    <i class="fas fa-clipboard-list"></i>
+                    <p>No attendance recorded today</p>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Instructions -->
+        <div class="card-header">
+            <h3><i class="fas fa-info-circle animate-pulse"></i> Instructions</h3>
+        </div>
+        <div class="card-content">
+            <div class="instruction-list">
+                <div class="instruction-item animate-slide-in" data-delay="800">
+                    <i class="fas fa-check-circle animate-check"></i>
+                    <span>Position your face within the frame</span>
+                </div>
+                <div class="instruction-item animate-slide-in" data-delay="900">
+                    <i class="fas fa-check-circle animate-check"></i>
+                    <span>Ensure good lighting conditions</span>
+                </div>
+            <div class="instruction-item animate-slide-in" data-delay="1000">
+                <i class="fas fa-check-circle animate-check"></i>
+                <span>Look directly at the camera</span>
+            </div>
+            <div class="instruction-item animate-slide-in" data-delay="1100">
+                <i class="fas fa-check-circle animate-check"></i>
+                <span>Stay still for recognition</span>
+            </div>
+            <div class="instruction-item animate-slide-in" data-delay="1200">
+                <i class="fas fa-check-circle animate-check"></i>
+                <span>Wait for confirmation message</span>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+
+        <!-- Manual Attendance Entry -->
+        
+        </div>
+    </main>
+
+    <div id="loading" class="loading-spinner" style="display: none;">
+        <div class="spinner"></div>
+        <p>Processing Recognition...</p>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="recognition.js"></script>
+</body>
+<style>
+    
+</style>
+
+</html>

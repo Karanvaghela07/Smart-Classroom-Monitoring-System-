@@ -1,0 +1,113 @@
+/* Recognition Panel Styles */
+.recognition-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: flex-start;
+  width: 1000px;
+  background: var(--bg-secondary, #171f2b);
+  border-radius: 20px;
+  box-shadow: var(--shadow, 0 2px 32px rgba(60,60,90,0.15));
+  border: 1px solid var(--border-color, #252b37);
+  padding: 2rem 2.5rem 2rem 2.5rem;
+  margin-bottom: 2rem;
+}
+.card-content{
+    display: flex;
+}
+
+/* Card Header */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #ec4899;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.01em;
+}
+
+.card-header h3, .card-header i {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+/* Status Indicator */
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1rem 1.4rem;
+  border-radius: 50px;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+  background: rgba(16,185,129,0.07);
+  color: #23e38d;
+  border: 1.5px solid rgba(16,185,129,0.2);
+  font-size: 1rem;
+  box-shadow: 0 0 12px 0 rgba(16,185,129,0.12);
+}
+
+.status-indicator i {
+  font-size: 1.1rem;
+  color: #23e38d;
+  background: #1e293b;
+  border-radius: 50%;
+  padding: 0.2em;
+}
+
+/* Recognition Results */
+.recognition-results {
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(60,64,90,0.18);
+  border-radius: 15px;
+  margin-top: 0.5rem;
+  padding: 1rem 1rem 0.8rem 1rem;
+  color: var(--text-secondary, #cbd5e1);
+  font-size: 1.1rem;
+  font-weight: 400;
+  box-shadow: 0 2px 12px rgba(20,40,60,0.06);
+  border: 1px solid var(--border-color, #252b37);
+  width: 100%;
+}
+
+/* No face recognized state */
+.no-recognition {
+  text-align: center;
+  color: var(--text-secondary, #7dd3fc);
+  opacity: 0.6;
+  font-size: 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.no-recognition i {
+  font-size: 2.2rem;
+  opacity: 0.4;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+/* Main theme dark overrides */
+.dark-theme .recognition-panel {
+  background: #151a23;
+  border-color: #283041;
+}
+.dark-theme .recognition-results {
+  background: #131620;
+  color: #94a3b8;
+  border-color: #252b37;
+}
+.dark-theme .status-indicator {
+  background: rgba(16,185,129,0.07);
+  color: #23e38d;
+  border-color: rgba(16,185,129,0.3);
+}
+.dark-theme .no-recognition {
+  color: #94a3b8;
+}

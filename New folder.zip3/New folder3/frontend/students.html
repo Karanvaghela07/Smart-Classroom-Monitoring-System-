@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students - Attendance System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="students.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="dark-theme">
+    <!-- Theme Toggle -->
+    <div class="theme-controls">
+        <button id="theme-toggle" class="theme-btn">
+            <i class="fas fa-sun"></i>
+        </button>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-user-check"></i>
+                <h1 class="nav-title">Attendance System</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="recognition.html" class="nav-link"><i class="fas fa-camera"></i> Recognition</a></li>
+                <li><a href="history.html" class="nav-link"><i class="fas fa-history"></i> History</a></li>
+                <li><a href="students.html" class="nav-link active"><i class="fas fa-users"></i> Students</a></li>
+                <li><a href="reports.html" class="nav-link"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                <li><a href="settings.html" class="nav-link"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="about.html" class="nav-link"><i class="fas fa-info-circle"></i> About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="students-page">
+            <!-- Page Header -->
+            <div class="page-header-students">
+                <h1 class="gradient-text">Student Management</h1>
+                <p>Manage and view all registered students in the face recognition system</p>
+            </div>
+
+            <!-- Stats Overview -->
+            <div class="students-stats">
+                <div class="stat-card purple animate-card" data-delay="0">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-info"><h3 id="total-students-count">0</h3><p>Total Students</p></div>
+                    <div class="stat-glow purple-glow"></div>
+                </div>
+                <div class="stat-card green animate-card" data-delay="100">
+                    <div class="stat-icon"><i class="fas fa-user-check"></i></div>
+                    <div class="stat-info"><h3 id="present-today-count">0</h3><p>Present Today</p></div>
+                    <div class="stat-glow green-glow"></div>
+                </div>
+                <div class="stat-card orange animate-card" data-delay="200">
+                    <div class="stat-icon"><i class="fas fa-user-clock"></i></div>
+                    <div class="stat-info"><h3 id="absent-today-count">0</h3><p>Absent Today</p></div>
+                    <div class="stat-glow orange-glow"></div>
+                </div>
+                <div class="stat-card blue animate-card" data-delay="300">
+                    <div class="stat-icon"><i class="fas fa-percentage"></i></div>
+                    <div class="stat-info"><h3 id="attendance-percentage">0%</h3><p>Attendance Rate</p></div>
+                    <div class="stat-glow blue-glow"></div>
+                </div>
+            </div>
+
+            <!-- Search and Filters -->
+            <div class="students-controls animate-slide-up" data-delay="400">
+                <div class="search-section">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="student-search" placeholder="Search students by name or ID..." class="search-input">
+                    </div>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all"><i class="fas fa-users"></i> All Students</button>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button class="action-btn primary pulse-btn" id="add-student-btn"><i class="fas fa-plus"></i> Add Student</button>
+                    <button class="action-btn secondary" id="export-students-btn"><i class="fas fa-download"></i> Export List</button>
+                </div>
+            </div>
+
+            <!-- Students Grid -->
+            <div class="students-container animate-fade-in" data-delay="500">
+                <div id="students-grid" class="students-grid"></div>
+            </div>
+
+            <!-- Add Student Modal -->
+            <div id="add-student-modal" class="modal" style="display: none;">
+                <div class="modal-backdrop"></div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3><i class="fas fa-user-plus"></i> Add New Student</h3>
+                        <button class="modal-close" id="close-modal"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="add-student-form">
+                            <div class="form-group">
+                                <label for="new-student-name">Student Name</label>
+                                <input type="text" id="new-student-name" placeholder="Enter student name" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-student-id">Student ID</label>
+                                <input type="text" id="new-student-id" placeholder="Enter student ID" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-student-photo">Student Photo</label>
+                                <div class="file-input-wrapper">
+                                    <input type="file" id="new-student-photo" accept="image/*" class="file-input" required>
+                                    <div class="file-input-display">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                        <span>Choose photo or drag & drop</span>
+                                    </div>
+                                </div>
+                                <small>Upload a clear photo of the student's face (JPG, PNG)</small>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn-cancel" id="cancel-add">Cancel</button>
+                                <button type="submit" class="btn-submit">
+                                    <i class="fas fa-plus"></i>
+                                    Add Student
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <script>
+                // --- Improved Drag-and-Drop File Handling ---
+const fileInput = document.getElementById('new-student-photo');
+const fileDisplay = document.querySelector('.file-input-display');
+const wrapper = document.querySelector('.file-input-wrapper');
+
+// Clicking the display also opens file picker
+if (fileDisplay && fileInput) {
+    fileDisplay.addEventListener('click', function() {
+        fileInput.click();
+    });
+}
+
+// Drag and drop events
+if (wrapper && fileInput && fileDisplay) {
+    wrapper.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        wrapper.classList.add('dragging');
+    });
+
+    wrapper.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        wrapper.classList.remove('dragging');
+    });
+
+    wrapper.addEventListener('drop', (e) => {
+        e.preventDefault();
+        wrapper.classList.remove('dragging');
+        // Only accept single file
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            fileInput.files = e.dataTransfer.files;
+            const fileName = e.dataTransfer.files.name;
+            fileDisplay.innerHTML = `<i class="fas fa-check-circle"></i> <span>Selected: ${fileName}</span>`;
+            fileDisplay.style.color = 'var(--green)';
+        }
+    });
+}
+
+// Always update display after choosing file
+if (fileInput && fileDisplay) {
+    fileInput.addEventListener('change', (e) => {
+        if (fileInput.files && fileInput.files.length > 0) {
+            const fileName = fileInput.files.name;
+            fileDisplay.innerHTML = `<i class="fas fa-check-circle"></i> <span>Selected: ${fileName}</span>`;
+            fileDisplay.style.color = 'var(--green)';
+        } else {
+            fileDisplay.innerHTML = `<i class="fas fa-cloud-upload-alt"></i> <span>Choose photo or drag & drop</span>`;
+            fileDisplay.style.color = '';
+        }
+    });
+}
+async function handleAddStudent(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('new-student-name')?.value.trim();
+    const studentId = document.getElementById('new-student-id')?.value.trim();
+    const photoFile = document.getElementById('new-student-photo')?.files[0];
+
+    if (!name || !studentId || !photoFile) {
+        showNotification('Please fill all fields', 'error');
+        return;
+    }
+
+    try {
+        showLoading();
+
+        // Build FormData
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('student_id', studentId);
+        formData.append('photo', photoFile);
+
+        // POST to backend
+        const response = await fetch(`${API_BASE_URL}/students/`, {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+            showNotification('Student added successfully!', 'success');
+            // Reload student grid after add
+            if (typeof loadStudentsData === 'function') {
+                await loadStudentsData();
+            }
+            // Reset and close modal
+            const modal = document.getElementById('add-student-modal');
+            if (modal) modal.style.display = 'none';
+            const form = document.getElementById('add-student-form');
+            if (form) form.reset();
+        } else {
+            showNotification(result.detail || result.message || 'Could not add student, check for duplicate or backend error.', 'error');
+        }
+    } catch (error) {
+        console.error('Error adding student:', error);
+        showNotification('Error adding student. Please try again.', 'error');
+    } finally {
+        hideLoading();
+    }
+}
+
+            </script>
+        </div>
+    </main>
+    <div id="loading" class="loading-spinner" style="display: none;">
+        <div class="spinner"></div>
+        <p>Loading Students...</p>
+    </div>
+    
+    <script>
+     class StudentsManager {
+    constructor() {
+        this.students = [];
+        this.filteredStudents = [];
+        this.searchTerm = '';
+        this.refreshTimer = null;
+        this.init();
+    }
+
+    init() {
+        this.loadStudents();
+        this.setupEventListeners();
+        this.startAutoRefresh();
+    }
+
+    setupEventListeners() {
+        // Search
+        const searchInput = document.getElementById('student-search');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                this.searchTerm = e.target.value.toLowerCase();
+                this.filterStudents();
+            });
+        }
+
+        // Add Student
+        const addStudentBtn = document.getElementById('add-student-btn');
+        if (addStudentBtn) {
+            addStudentBtn.addEventListener('click', () => this.showAddStudentModal());
+        }
+
+        // Export Students
+        const exportBtn = document.getElementById('export-students-btn');
+        if (exportBtn) {
+            exportBtn.addEventListener('click', () => this.exportStudents());
+        }
+
+        this.setupModalEvents();
+    }
+
+    setupModalEvents() {
+        const modal = document.getElementById('add-student-modal');
+        const closeModal = document.getElementById('close-modal');
+        const cancelBtn = document.getElementById('cancel-add');
+        const addForm = document.getElementById('add-student-form');
+        if (closeModal) closeModal.onclick = () => this.hideAddStudentModal();
+        if (cancelBtn) cancelBtn.onclick = () => this.hideAddStudentModal();
+        if (modal) {
+            modal.onclick = (e) => {
+                if (e.target === modal || e.target.classList.contains('modal-backdrop')) {
+                    this.hideAddStudentModal();
+                }
+            };
+        }
+        if (addForm) addForm.onsubmit = (e) => {
+            e.preventDefault();
+            this.addStudent();
+        };
+    }
+
+    async loadStudents() {
+        try {
+            this.showLoading();
+            const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                ? 'http://localhost:7000' : window.location.origin;
+            // Use centralized STUDENTS_DATA for demo; in production, fetch(`/students_with_attendance_stats`)
+            const studentsArray = Object.values(STUDENTS_DATA); // from global data [attached_file:1]
+            this.students = studentsArray;
+            this.filteredStudents = studentsArray;
+            this.renderStudents();
+        } catch (error) {
+            this.showError('Failed to load students');
+        }
+    }
+
+    startAutoRefresh() {
+        if (this.refreshTimer) clearInterval(this.refreshTimer);
+        this.refreshTimer = setInterval(() => { this.loadStudents(); }, 15000);
+        window.addEventListener('beforeunload', () => { if (this.refreshTimer) clearInterval(this.refreshTimer); });
+    }
+
+    filterStudents() {
+        this.filteredStudents = this.students.filter(student =>
+            student.fullName.toLowerCase().includes(this.searchTerm) ||
+            student.studentId.toLowerCase().includes(this.searchTerm)
+        );
+        this.renderStudents();
+    }
+
+    renderStudents() {
+        const studentsGrid = document.getElementById('students-grid');
+        if (!studentsGrid) return;
+        if (this.filteredStudents.length === 0) {
+            studentsGrid.innerHTML = `
+                <div class="empty-students">
+                    <i class="fas fa-users"></i>
+                    <h3>No Students Found</h3>
+                    <p>No students match your search.</p>
+                    <button class="action-btn view" onclick="studentsManager.showAddStudentModal()">
+                        <i class="fas fa-plus"></i> Add Student
+                    </button>
+                </div>
+            `;
+            return;
+        }
+        studentsGrid.innerHTML = this.filteredStudents.map((student, idx) => `
+            <div class="student-card" style="animation-delay:${idx * 100}ms">
+                <img src="${student.photo ? API_BASE_URL + student.photo : '/static/default.png'}" alt="${student.fullName}" class="student-photo">
+                <div class="student-info">
+                    <h3 class="student-name" style="color:${idx===0 ? '#d946ef':'#e5e7eb'}">${student.fullName}</h3>
+                    <div class="student-details">
+                        <div>Grade: ${student.class}</div>
+                        <div><i class="fas fa-envelope"></i> ${student.email}</div>
+                        <div><i class="fas fa-phone"></i> ${student.phone}</div>
+                        <div><i class="fas fa-clock"></i> Last seen: ${student.lastSeen ? student.lastSeen : 'Not today'}</div>
+                        <div><i class="fas fa-calendar"></i> Joined: ${student.joinDate}</div>
+                        <div>${student.totalPresent} Present</div>
+                        <div>${student.totalAbsent} Absent</div>
+                        <div>${student.attendancePercentage}% Rate</div>
+                    </div>
+                    <div class="student-actions" style="margin-top:16px;">
+                        <button class="action-btn view" data-id="${student.name}"><i class="fas fa-eye"></i> View</button>
+                        <button class="action-btn edit" data-id="${student.name}"><i class="fas fa-edit"></i> Edit</button>
+                        <button class="action-btn delete" data-id="${student.name}"><i class="fas fa-trash"></i> Delete</button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        // Attach event listeners for buttons
+        studentsGrid.querySelectorAll('.action-btn.view').forEach(btn => {
+            btn.onclick = () => this.viewStudent(btn.getAttribute('data-id'));
+        });
+        studentsGrid.querySelectorAll('.action-btn.edit').forEach(btn => {
+            btn.onclick = () => this.editStudent(btn.getAttribute('data-id'));
+        });
+        studentsGrid.querySelectorAll('.action-btn.delete').forEach(btn => {
+            btn.onclick = () => this.deleteStudent(btn.getAttribute('data-id'));
+        });
+
+        this.addCardAnimations();
+    }
+
+    addCardAnimations() {
+        const cards = document.querySelectorAll('.student-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    }
+
+    showLoading() {
+        const studentsGrid = document.getElementById('students-grid');
+        if (studentsGrid) {
+            studentsGrid.innerHTML = `
+                <div class="loading-students">
+                    <div class="loading-animation">
+                        <div class="loading-dots">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                    </div>
+                    <p>Loading students...</p>
+                </div>
+            `;
+        }
+    }
+
+    showError(message) {
+        const studentsGrid = document.getElementById('students-grid');
+        if (studentsGrid) {
+            studentsGrid.innerHTML = `
+                <div class="empty-students">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Error</h3>
+                    <p>${message}</p>
+                    <button class="action-btn view" onclick="studentsManager.loadStudents()">
+                        <i class="fas fa-refresh"></i> Retry
+                    </button>
+                </div>
+            `;
+        }
+    }
+
+    showAddStudentModal() {
+        const modal = document.getElementById('add-student-modal');
+        if (modal) {
+            modal.style.display = 'flex';
+            modal.classList.add('show');
+            setTimeout(() => {
+                const firstInput = modal.querySelector('input[type="text"]');
+                if (firstInput) firstInput.focus();
+            }, 100);
+        }
+    }
+
+    hideAddStudentModal() {
+        const modal = document.getElementById('add-student-modal');
+        if (modal) {
+            modal.classList.remove('show');
+            setTimeout(() => { modal.style.display = 'none'; }, 250);
+        }
+        const form = document.getElementById('add-student-form');
+        if (form) form.reset();
+    }
+
+    async addStudent() {
+        // Implement your add student logic here
+    }
+
+    viewStudent(studentName) {
+        const student = this.students.find(s => s.name === studentName);
+        if (student) {
+            this.showNotification(`Viewing profile for ${student.fullName}`, 'info');
+            // Open modal/detail view here if desired
+        }
+    }
+
+    editStudent(studentName) {
+        const student = this.students.find(s => s.name === studentName);
+        if (student) {
+            this.showNotification(`Edit details for ${student.fullName}`, 'info');
+            // Open edit modal here if desired
+        }
+    }
+
+    deleteStudent(studentName) {
+        if (!confirm('Are you sure you want to delete this student?')) return;
+        this.students = this.students.filter(s => s.name !== studentName);
+        this.filteredStudents = this.filteredStudents.filter(s => s.name !== studentName);
+        this.renderStudents();
+        this.showNotification('Student deleted.', 'success');
+    }
+
+    exportStudents() {
+        // Implement your export logic here (CSV)
+        this.showNotification('Students list exported!', 'success');
+    }
+
+    showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        const icon = type === 'success' ? 'check-circle' :
+            type === 'error' ? 'exclamation-circle' : 'info-circle';
+        notification.innerHTML = `<i class="fas fa-${icon}"></i> ${message}`;
+        document.body.appendChild(notification);
+        setTimeout(() => {
+            notification.style.transform = 'translateX(100%)';
+            notification.style.opacity = '0';
+            setTimeout(() => {
+                if (notification.parentNode) notification.remove();
+            }, 300);
+        }, 3000);
+    }
+}
+
+// Initialize students manager
+let studentsManager;
+document.addEventListener('DOMContentLoaded', () => {
+    studentsManager = new StudentsManager();
+});
+
+
+
+    </script>
+    <script src="students.js"></script>
+</body>
+</html>
+
+    <style>
+       .student-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  width: 100%;
+  gap: 18px;
+}
+
+/* Make all buttons fill equally and align horizontally */
+.action-btn {
+  flex: 1 1 0;
+  padding: 10px 0;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, box-shadow 0.2s;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.action-btn.view   { background: #3b82f6; color: #fff; }
+.action-btn.edit   { background: #a21caf; color: #fff; }
+.action-btn.delete { background: #ef4444; color: #fff; }
+.action-btn:hover  { opacity: 0.9; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+
+/* Ensures modal is centered both vertically and horizontally */
+#add-student-modal {
+    display: none; /* Keep it hidden by default */
+    position: fixed;
+    z-index: 9999;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;  /* Flex center */
+    align-items: center;      /* Flex center */
+    background: rgba(0,0,0,0.45); /* Backdrop */
+    overflow-y: auto;
+}
+#add-student-modal.show, #add-student-modal[style*="display: flex"] {
+    display: flex !important;
+}
+#add-student-modal .modal-content {
+    position: relative;
+    margin: 0;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.21);
+    background: #121212;
+    padding: 40px 30px 28px 30px;
+    border-radius: 18px;
+    min-width: 350px;
+    max-width: 95vw;
+    width: 100%;
+    max-height: 96vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+@media (max-width: 600px) {
+    #add-student-modal .modal-content { min-width: 95vw; padding: 16px 6px; }
+}
+
+
+    </style>
+
+    <script src="script.js"></script>
+    <script src="students.js"></script>
+</body>
+</html>

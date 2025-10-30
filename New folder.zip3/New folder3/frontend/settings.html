@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Attendance System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="settings.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="dark-theme">
+    <!-- Theme Toggle -->
+    <div class="theme-controls">
+        <button id="theme-toggle" class="theme-btn">
+            <i class="fas fa-sun"></i>
+        </button>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-user-check"></i>
+                <h1 class="nav-title">Attendance System</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="recognition.html" class="nav-link"><i class="fas fa-camera"></i> Recognition</a></li>
+                <li><a href="history.html" class="nav-link"><i class="fas fa-history"></i> History</a></li>
+                <li><a href="students.html" class="nav-link"><i class="fas fa-users"></i> Students</a></li>
+                <li><a href="reports.html" class="nav-link"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                <li><a href="settings.html" class="nav-link active"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="about.html" class="nav-link"><i class="fas fa-info-circle"></i> About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="settings-page">
+            <!-- Page Header -->
+            <div class="page-header-settings">
+                <h1>System Settings</h1>
+                <p>Configure and customize your face recognition attendance system</p>
+            </div>
+
+            <div class="settings-layout">
+                <!-- Settings Navigation -->
+                <div class="settings-nav">
+                    <div class="settings-nav-card">
+                        <h3><i class="fas fa-list"></i> Settings Categories</h3>
+                        <ul class="settings-nav-list">
+                            <li><a href="#general" class="settings-nav-link active" data-section="general">
+                                <i class="fas fa-cog"></i> General Settings
+                            </a></li>
+                            <li><a href="#recognition" class="settings-nav-link" data-section="recognition">
+                                <i class="fas fa-camera"></i> Face Recognition
+                            </a></li>
+                            <li><a href="#notifications" class="settings-nav-link" data-section="notifications">
+                                <i class="fas fa-bell"></i> Notifications
+                            </a></li>
+                            <li><a href="#security" class="settings-nav-link" data-section="security">
+                                <i class="fas fa-shield-alt"></i> Security
+                            </a></li>
+                            <li><a href="#backup" class="settings-nav-link" data-section="backup">
+                                <i class="fas fa-database"></i> Backup & Export
+                            </a></li>
+                            <li><a href="#appearance" class="settings-nav-link" data-section="appearance">
+                                <i class="fas fa-palette"></i> Appearance
+                            </a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Settings Content -->
+                <div class="settings-content">
+                    <!-- General Settings -->
+                    <div id="general-section" class="settings-section active">
+                        <div class="settings-card">
+                            <div class="settings-card-header">
+                                <h3><i class="fas fa-cog"></i> General Settings</h3>
+                                <p>Basic system configuration and preferences</p>
+                            </div>
+                            <div class="settings-card-body">
+                                <div class="setting-group">
+                                    <label class="setting-label">System Name</label>
+                                    <input type="text" class="setting-input" value="Face Recognition Attendance System" id="system-name">
+                                    <small class="setting-help">Display name for your attendance system</small>
+                                </div>
+                                
+                                <div class="setting-group">
+                                    <label class="setting-label">Organization Name</label>
+                                    <input type="text" class="setting-input" value="Your Organization" id="org-name">
+                                    <small class="setting-help">Name of your school or organization</small>
+                                </div>
+
+                                <div class="setting-group">
+                                    <label class="setting-label">Time Zone</label>
+                                    <select class="setting-input" id="timezone">
+                                        <option value="UTC">UTC (Coordinated Universal Time)</option>
+                                        <option value="EST" selected>EST (Eastern Standard Time)</option>
+                                        <option value="PST">PST (Pacific Standard Time)</option>
+                                        <option value="IST">IST (India Standard Time)</option>
+                                    </select>
+                                </div>
+
+                                <div class="setting-group">
+                                    <label class="setting-label">Date Format</label>
+                                    <select class="setting-input" id="date-format">
+                                        <option value="MM/DD/YYYY" selected>MM/DD/YYYY</option>
+                                        <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                                        <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                                    </select>
+                                </div>
+
+                                <div class="setting-group">
+                                    <div class="setting-toggle">
+                                        <label class="toggle-label">
+                                            <input type="checkbox" class="toggle-input" id="auto-backup" checked>
+                                            <span class="toggle-slider"></span>
+                                            Enable Auto Backup
+                                        </label>
+                                        <small class="setting-help">Automatically backup attendance data daily</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Face Recognition Settings -->
+                    <div id="recognition-section" class="settings-section">
+                        <div class="settings-card">
+                            <div class="settings-card-header">
+                                <h3><i class="fas fa-camera"></i> Face Recognition Settings</h3>
+                                <p>Configure AI model parameters and recognition behavior</p>
+                            </div>
+                            <div class="settings-card-body">
+                                <div class="setting-group">
+                                    <label class="setting-label">Recognition Confidence Threshold</label>
+                                    <div class="slider-container">
+                                        <input type="range" class="setting-slider" min="0.3" max="0.9" step="0.1" value="0.6" id="confidence-threshold">
+                                        <span class="slider-value">0.6</span>
+                                    </div>
+                                    <small class="setting-help">Higher values = more strict recognition (0.3 = loose, 0.9 = strict)</small>
+                                </div>
+
+                                <div class="setting-group">
+                                    <label class="setting-label">Auto Recognition Interval</label>
+                                    <select class="setting-input" id="auto-interval">
+                                        <option value="1">1 second</option>
+                                        <option value="3" selected>3 seconds</option>
+                                        <option value="5">5 seconds</option>
+                                        <option value="10">10 seconds</option>
+                                        <option value="0">Disabled</option>
+                                    </select>
+                                    <small class="setting-help">How often to automatically attempt recognition</small>
+                                </div>
+
+                                <div class="setting-group">
+                                    <div class="setting-toggle">
+                                        <label class="toggle-label">
+                                            <input type="checkbox" class="toggle-input" id="save-captures" checked>
+                                            <span class="toggle-slider"></span>
+                                            Save Recognition Captures
+                                        </label>
+                                        <small class="setting-help">Store captured images for review and training</small>
+                                    </div>
+                                </div>
+
+                                <div class="setting-group">
+                                    <div class="setting-toggle">
+                                        <label class="toggle-label">
+                                            <input type="checkbox" class="toggle-input" id="multiple-faces">
+                                            <span class="toggle-slider"></span>
+                                            Allow Multiple Faces
+                                        </label>
+                                        <small class="setting-help">Recognize multiple people in a single capture</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notifications Settings -->
+                    <div id="notifications-section" class="settings-section">
+                        <div class="settings-card">
+                            <div class="settings-card-header">
+                                <h3><i class="fas fa-bell"></i> Notification Settings</h3>
+                                <p>Configure alerts and notification preferences</p>
+                            </div>
+                            <div class="settings-card-body">
+                                <div class="setting-group">
+                                    <div class="setting-toggle">
+                                        <label class="toggle-label">
+                                            <input type="checkbox" class="toggle-input" id="success-notifications" checked>
+                                            <span class="toggle-slider"></span>
+                                            Success Notifications
+                                        </label>
+                                        <small class="setting-help">Show notifications for successful attendance marking</small>
+                                    </div>
+                                </div>
+
+                                <div class="setting-group">
+                                    <div class="setting-toggle">
+                                        <label class="toggle-label">
+                                            <input type="checkbox" class="toggle-input" id="error-notifications" checked>
+                                            <span class="toggle-slider"></span>
+                                            Error Notifications
+                                        </label>
+                                        <small class="setting-help">Show notifications for recognition errors</small>
+                                    </div>
+                                </div>
+
+                                <div class="setting-group">
+                                    <div class="setting-toggle">
+                                        <label class="toggle-label">
+                                            <input type="checkbox" class="toggle-input" id="sound-alerts">
+                                            <span class="toggle-slider"></span>
+                                            Sound Alerts
+                                        </label>
+                                        <small class="setting-help">Play sound when attendance is marked</small>
+                                    </div>
+                                </div>
+
+                                <div class="setting-group">
+                                    <label class="setting-label">Notification Duration</label>
+                                    <select class="setting-input" id="notification-duration">
+                                        <option value="3">3 seconds</option>
+                                        <option value="5" selected>5 seconds</option>
+                                        <option value="10">10 seconds</option>
+                                        <option value="0">Until dismissed</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Settings -->
+                    <div id="security-section" class="settings-section">
+                        <div class="settings-card">
+                            <div class="settings-card-header">
+                                <h3><i class="fas fa-shield-alt"></i> Security Settings</h3>
+                                <p>Manage access control and security features</p>
+                            </div>
+                            <div class="settings-card-body">
+                                <div class="setting-group">
+                                    <div class="setting-toggle">
+                                        <label class="toggle-label">
+                                            <input type="checkbox" class="toggle-input" id="admin-mode" checked>
+                                            <span class="toggle-slider"></span>
+                                            Admin Mode Required
+                                        </label>
+                                        <small class="setting-help">Require admin authentication for settings changes</small>
+                                    </div>
+                                </div>
+
+                                <div class="setting-group">
+                                    <label class="setting-label">Session Timeout</label>
+                                    <select class="setting-input" id="session-timeout">
+                                        <option value="30">30 minutes</option>
+                                        <option value="60" selected>1 hour</option>
+                                        <option value="240">4 hours</option>
+                                        <option value="480">8 hours</option>
+                                        <option value="0">Never</option>
+                                    </select>
+                                </div>
+
+                                <div class="setting-group">
+                                    <div class="setting-toggle">
+                                        <label class="toggle-label">
+                                            <input type="checkbox" class="toggle-input" id="audit-log" checked>
+                                            <span class="toggle-slider"></span>
+                                            Enable Audit Log
+                                        </label>
+                                        <small class="setting-help">Log all system activities and changes</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Backup Settings -->
+                    <div id="backup-section" class="settings-section">
+                        <div class="settings-card">
+                            <div class="settings-card-header">
+                                <h3><i class="fas fa-database"></i> Backup & Export Settings</h3>
+                                <p>Manage data backup and export options</p>
+                            </div>
+                            <div class="settings-card-body">
+                                <div class="setting-group">
+                                    <label class="setting-label">Auto Backup Frequency</label>
+                                    <select class="setting-input" id="backup-frequency">
+                                        <option value="daily" selected>Daily</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                        <option value="never">Never</option>
+                                    </select>
+                                </div>
+
+                                <div class="setting-group">
+                                    <label class="setting-label">Backup Retention</label>
+                                    <select class="setting-input" id="backup-retention">
+                                        <option value="7">7 days</option>
+                                        <option value="30" selected>30 days</option>
+                                        <option value="90">90 days</option>
+                                        <option value="365">1 year</option>
+                                    </select>
+                                </div>
+
+                                <div class="setting-group">
+                                    <div class="backup-actions">
+                                        <button class="action-btn primary" id="create-backup">
+                                            <i class="fas fa-download"></i>
+                                            Create Backup Now
+                                        </button>
+                                        <button class="action-btn secondary" id="restore-backup">
+                                            <i class="fas fa-upload"></i>
+                                            Restore from Backup
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Appearance Settings -->
+                    <div id="appearance-section" class="settings-section">
+                        <div class="settings-card">
+                            <div class="settings-card-header">
+                                <h3><i class="fas fa-palette"></i> Appearance Settings</h3>
+                                <p>Customize the look and feel of your system</p>
+                            </div>
+                            <div class="settings-card-body">
+                                <div class="setting-group">
+                                    <label class="setting-label">Theme</label>
+                                    <div class="theme-selector">
+                                        <div class="theme-option active" data-theme="dark">
+                                            <div class="theme-preview dark-preview"></div>
+                                            <span>Dark Theme</span>
+                                        </div>
+                                        <div class="theme-option" data-theme="light">
+                                            <div class="theme-preview light-preview"></div>
+                                            <span>Light Theme</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="setting-group">
+                                    <label class="setting-label">Accent Color</label>
+                                    <div class="color-selector">
+                                        <div class="color-option active" data-color="purple" style="background: #8b5cf6;"></div>
+                                        <div class="color-option" data-color="blue" style="background: #3b82f6;"></div>
+                                        <div class="color-option" data-color="green" style="background: #10b981;"></div>
+                                        <div class="color-option" data-color="orange" style="background: #f59e0b;"></div>
+                                        <div class="color-option" data-color="red" style="background: #ef4444;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="setting-group">
+                                    <div class="setting-toggle">
+                                        <label class="toggle-label">
+                                            <input type="checkbox" class="toggle-input" id="animations" checked>
+                                            <span class="toggle-slider"></span>
+                                            Enable Animations
+                                        </label>
+                                        <small class="setting-help">Show smooth transitions and hover effects</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Save Settings -->
+            <div class="settings-footer">
+                <div class="settings-actions">
+                    <button class="action-btn secondary" id="reset-settings">
+                        <i class="fas fa-undo"></i>
+                        Reset to Defaults
+                    </button>
+                    <button class="action-btn primary" id="save-settings">
+                        <i class="fas fa-save"></i>
+                        Save Settings
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="loading" class="loading-spinner" style="display: none;">
+        <div class="spinner"></div>
+        <p>Saving Settings...</p>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    // Select all setting inputs (text, checkbox, select, range slider, etc.)
+    const settingInputs = document.querySelectorAll('.setting-input, .toggle-input, .setting-slider');
+
+    settingInputs.forEach(input => {
+        // Listen to change event for selects, inputs, and toggle inputs
+        input.addEventListener('input', () => handleSettingChange(input));
+        // For checkbox toggles, listen to 'change' for best response
+        if (input.type === 'checkbox') {
+            input.addEventListener('change', () => handleSettingChange(input));
+        }
+    });
+});
+
+async function handleSettingChange(inputElement) {
+    let key = inputElement.id || inputElement.name;
+    let value;
+
+    if (inputElement.type === 'checkbox') {
+        value = inputElement.checked;
+    } else if (inputElement.type === 'range') {
+        value = parseFloat(inputElement.value);
+    } else {
+        value = inputElement.value;
+    }
+
+    if (!key) {
+        console.warn('Setting input without a key/id:', inputElement);
+        return;
+    }
+
+    console.log('Setting changed:', key, value);
+
+    try {
+        showLoading();
+
+        const response = await fetch('/api/settings/update', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ settingKey: key, value: value })
+        });
+
+        if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+
+        const result = await response.json(); // Assume backend responds with JSON { success: true, message: "" }
+
+        if (result.success) {
+            showNotification(`Setting "${key}" saved successfully`, 'success');
+            // Optionally update UI behavior immediately here if needed
+        } else {
+            showNotification(`Failed to save "${key}": ${result.message || 'Unknown error'}`, 'error');
+        }
+
+    } catch (error) {
+        console.error('Error saving setting:', error);
+        showNotification(`Error saving setting "${key}"`, 'error');
+    } finally {
+        hideLoading();
+    }
+}
+
+// Optional: implement showLoading/hideLoading and showNotification functions if not already defined
+function showLoading() {
+    const loading = document.getElementById('loading');
+    if (loading) loading.style.display = 'flex';
+}
+function hideLoading() {
+    const loading = document.getElementById('loading');
+    if (loading) loading.style.display = 'none';
+}
+function showNotification(message, type = 'info') {
+    // Basic notification, adapt based on your styles
+    alert(`${type.toUpperCase()}: ${message}`);
+}
+
+    </script>
+    <script src="script.js"></script>
+    <script src="settings.js"></script>
+</body>
+</html>
