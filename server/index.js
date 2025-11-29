@@ -73,6 +73,12 @@ const io = new Server(server, {
 });
 
 app.set("io", io);
+// Increase upload limit (critical for face recognition)
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ limit: "10mb", extended: true }));
+
+// Allow uploads folder publicly
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 
 // --------------------------------------
