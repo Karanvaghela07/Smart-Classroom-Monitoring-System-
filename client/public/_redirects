@@ -1,1 +1,8 @@
-/*    /index.html   200
+# Redirect all API requests to Render backend
+/api/*   https://smart-classroom-monitoring-system-9vuh.onrender.com/api/:splat   200
+
+# Redirect Socket.IO traffic to Render backend
+/socket.io/*   https://smart-classroom-monitoring-system-9vuh.onrender.com/socket.io/:splat  200
+
+# React Router fallback
+/*   /index.html   200
