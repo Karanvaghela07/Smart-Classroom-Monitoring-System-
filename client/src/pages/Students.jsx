@@ -7,26 +7,39 @@ export default function Students() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterDept, setFilterDept] = useState("all");
 
-  // Load real data from backend
+  const API_BASE = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const fetchStudents = async () => {
       try {
         const res = await api.get("/students");
         const list = res.data.students || [];
 
-        const mapped = list.map((s) => ({
-        id: s.studentId,        // FIXED
-        name: s.name,
-        email: s.email,
-        phone: s.phone,
-        rollNo: s.rollNo,
-        department: s.department,
-        year: s.year,
-        photo: s.photo
-          ? `http://localhost:5000/uploads/student_photos/${s.photo}`
-          : "https://via.placeholder.com/150",
-      }));
+        const mapped = list.map((s) => {
+          let photoURL = "https://via.placeholder.com/150";
 
+          if (s.photo) {
+            // CLOUDINARY → full URL
+            if (s.photo.startsWith("http")) {
+              photoURL = s.photo;
+            }
+            // LOCAL SERVER → filename only
+            else {
+              photoURL = `${API_BASE}/uploads/student_photos/${s.photo}`;
+            }
+          }
+
+          return {
+            id: s.studentId,
+            name: s.name,
+            email: s.email,
+            phone: s.phone,
+            rollNo: s.rollNo,
+            department: s.department,
+            year: s.year,
+            photo: photoURL,
+          };
+        });
 
         setStudents(mapped);
       } catch (err) {
@@ -53,7 +66,6 @@ export default function Students() {
         <p>Manage all registered students</p>
       </div>
 
-      {/* Search + Count */}
       <div className="students-topbar">
         <input
           className="students-search"
@@ -62,19 +74,28 @@ export default function Students() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
 
-        <div className="students-count">Total Students: {students.length}</div>
+        <div className="students-count">
+          Total Students: {students.length}
+        </div>
       </div>
 
-      {/* Student Cards */}
       <div className="students-grid">
         {filteredStudents.map((student, i) => (
           <div className="student-card" key={i}>
-            <img src={student.photo} alt={student.name} className="student-photo" />
+            <img
+              src={student.photo}
+              alt={student.name}
+              className="student-photo"
+            />
 
             <div className="student-info">
               <h2>{student.name}</h2>
-              <p><b>ID:</b> {student.id}</p>
-              <p><b>{student.department}</b> — {student.year}</p>
+              <p>
+                <b>ID:</b> {student.id}
+              </p>
+              <p>
+                <b>{student.department}</b> — {student.year}
+              </p>
               <p>{student.email}</p>
               <p>{student.phone}</p>
             </div>

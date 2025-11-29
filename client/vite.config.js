@@ -4,10 +4,19 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: true,          // Allow access from all hosts
-    port: 5173,          // Default Vite port
+    host: true,
+    port: 5173,
     strictPort: false,
-    https: false,        // Keep off unless you configure certificates
+    https: false,
     cors: true,
-  }
+
+    // 🔥 ADD THIS (backend proxy)
+    proxy: {
+      "/api": {
+        target: "http://localhost:5000",
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 })
