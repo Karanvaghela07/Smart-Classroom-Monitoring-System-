@@ -1,11 +1,11 @@
 import axios from "axios";
 
+// ⭐ Use relative /api instead of localhost
 const api = axios.create({
-  baseURL: "/api",   // ⭐ this allows Netlify redirects
-  withCredentials: true,
+  baseURL: "/api",
 });
 
-// 🔥 Attach JWT automatically
+// 🔥 Attach JWT automatically (original code kept)
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {
@@ -13,6 +13,5 @@ api.interceptors.request.use((config) => {
   }
   return config;
 });
-
 
 export default api;
