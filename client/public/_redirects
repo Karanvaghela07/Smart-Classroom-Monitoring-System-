@@ -1,1 +1,13 @@
+# Backend base API URL
+VITE_API_URL=https://smart-classroom-monitoring-system-9vuh.onrender.com
+
+# Uploads base (optional – frontend will use automatically)
+VITE_UPLOADS_URL=https://smart-classroom-monitoring-system-9vuh.onrender.com/uploads
+
+# Socket.IO URL (optional)
+VITE_SOCKET_URL=https://smart-classroom-monitoring-system-9vuh.onrender.com
+
+
+
+
 /*    /index.html   200
