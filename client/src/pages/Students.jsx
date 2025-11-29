@@ -14,18 +14,21 @@ export default function Students() {
         const res = await api.get("/students");
         const list = res.data.students || [];
 
-        const mapped = list.map((s) => ({
-        id: s.studentId,        // FIXED
-        name: s.name,
-        email: s.email,
-        phone: s.phone,
-        rollNo: s.rollNo,
-        department: s.department,
-        year: s.year,
-        photo: s.photo
-          ? `http://localhost:5000/uploads/student_photos/${s.photo}`
-          : "https://via.placeholder.com/150",
-      }));
+       const mapped = list.map((s) => ({
+          id: s.studentId,
+          name: s.name,
+          email: s.email,
+          phone: s.phone,
+          rollNo: s.rollNo,
+          department: s.department,
+          year: s.year,
+        
+          // ⭐ FINAL FIX — photo path
+          photo: s.photo
+            ? `/uploads/student_photos/${s.photo}`
+            : "https://via.placeholder.com/150",
+        }));
+
 
 
         setStudents(mapped);
