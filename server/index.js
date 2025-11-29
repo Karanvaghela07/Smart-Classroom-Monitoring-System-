@@ -10,8 +10,9 @@ const { Server } = require("socket.io");
 const app = express();
 const server = http.createServer(app);
 
-// 🔗 CONNECT TO MONGODB
+// Connect DB
 connectDB();
+
 const User = require("./models/User");
 const bcrypt = require("bcrypt");
 
@@ -32,44 +33,55 @@ async function createDefaultAdmin() {
 
 createDefaultAdmin();
 
-// Middleware
+
+// --------------------------------------
+// ⭐ FINAL CORS FIX (WORKS FOR ALL ORIGINS)
+// --------------------------------------
 app.use(
   cors({
-    origin: "http://localhost:5173",
-    credentials: true,
+    origin: "*",              // ⭐ Allow all origins (Netlify + Render + localhost)
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: false        // ⭐ Must be false when using wildcard origin
   })
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Auth middleware
+// Auth Middleware
 const auth = require("./middleware/auth");
 
+
 // --------------------------------------
-// STATIC FILES & FOLDERS
+// STATIC FILES
 // --------------------------------------
 const ensure = (p) => !fs.existsSync(p) && fs.mkdirSync(p, { recursive: true });
-
 ensure(path.join(__dirname, "uploads"));
 ensure(path.join(__dirname, "uploads/student_photos"));
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+
 // --------------------------------------
-// SOCKET CONFIG
+// ⭐ SOCKET.IO FIX (Allow All Origins)
 // --------------------------------------
 const io = new Server(server, {
-  cors: { origin: "http://localhost:5173" },
+  cors: {
+    origin: "*",               // ⭐ Allow all origins
+    methods: ["GET", "POST"],
+  },
 });
+
 app.set("io", io);
+
 
 // --------------------------------------
 // ROUTES
 // --------------------------------------
-app.use("/api/auth", require("./routes/auth")); // Public
-app.use("/api/students", auth, require("./routes/students")); // Protected
-app.use("/api/attendance", auth, require("./routes/attendance")); // Protected
-app.use("/api/face", auth, require("./routes/face")); // Protected
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/students", auth, require("./routes/students"));
+app.use("/api/attendance", auth, require("./routes/attendance"));
+app.use("/api/face", auth, require("./routes/face"));
 app.use("/api/reports", auth, require("./routes/reports"));
 
 
@@ -80,9 +92,11 @@ app.get("/", (req, res) => {
   res.json({ status: "Backend Running", database: "Mongo Connected!" });
 });
 
+
 // --------------------------------------
 // START SERVER
 // --------------------------------------
-server.listen(process.env.PORT || 5000, () =>
-  console.log(`🚀 Server running at http://localhost:${process.env.PORT || 5000}`)
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () =>
+  console.log(`🚀 Server running on port ${PORT}`)
 );
