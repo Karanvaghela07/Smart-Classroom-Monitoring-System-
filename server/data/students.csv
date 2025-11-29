@@ -1,0 +1,9 @@
+StudentID,Name,Email,Class,Division,Phone,JoinDate
+
+STU001,Karan,vaghelakaran8599@gmail.com,+919104520387,Computer Science,4th Year,1,2025-11-21,,STU001_KARAN_VAGHELA.jpg,2025-11-18
+STU002,Sahil,2203031250104@paruluniversity.ac.in,+919104520387,Computer Science,1st Year,2,2025-11-15,,STU002_sahil.png,2025-11-18
+STU003,Niti,2203051050630@paruluniversity.ac.in,+919104520387,Electronics,3rd Year,3,2025-10-28,,STU003_Niti.png,2025-11-18
+STU004,Aditya,2203031250071@paruluniversity.ac.in,+919104520387,Electronics,4th Year,4,2025-11-23,,STU004_Aditya.png,2025-11-18
+STU005,Vinit,2203031080215@paruluniversity.ac.in,987654345689,Electronics,2nd Year,5,2025-11-23,,STU005_Vinit.jpg,2025-11-19
+STU006,Shreyash,2203051050630@paruluniversity.ac.in,985678987,Civil,1st Year,6,2025-10-30,,STU006_Shreyash.jpg,2025-11-19
+STU007,Krinal,2203051050630@paruluniversity.ac.in,23456789654,Mechanical,1st Year,7,2025-11-21,,STU007_Krinal.jpg,2025-11-19

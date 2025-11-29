@@ -1,0 +1,155 @@
+/* ------------------------------
+   PAGE CONTAINER
+------------------------------ */
+.students-container {
+  padding: 30px;
+  background: #f7f9fc;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ------------------------------
+   HEADER
+------------------------------ */
+.students-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: #222;
+}
+
+.students-header p {
+  font-size: 15px;
+  color: #555;
+}
+
+/* ------------------------------
+   TOP BAR (Search + Count)
+------------------------------ */
+.students-topbar {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.students-search {
+  width: 350px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.students-search:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 4px rgba(74, 144, 226, 0.4);
+}
+
+.students-count {
+  font-size: 16px;
+  background: #4a90e2;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+/* ------------------------------
+   GRID LAYOUT
+------------------------------ */
+.students-grid {
+  margin-top: 35px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 25px;
+}
+
+/* ------------------------------
+   STUDENT CARD
+------------------------------ */
+.student-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e1e1e1;
+  padding: 14px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.student-card:hover {
+  transform: translateY(-5px);
+}
+
+/* IMAGE (SQUARE) */
+.student-photo {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px; /* Square corners */
+  background: #ddd;
+}
+
+/* ------------------------------
+   TEXT & CONTENT
+------------------------------ */
+.student-info {
+  margin-top: 12px;
+}
+
+.student-info h2 {
+  font-size: 20px;
+  margin: 6px 0;
+  font-weight: 600;
+}
+
+.student-info p {
+  font-size: 14px;
+  margin: 4px 0;
+  color: #444;
+}
+
+/* ------------------------------
+   ACTION BUTTONS
+------------------------------ */
+.student-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.btn-view,
+.btn-edit,
+.btn-delete {
+  flex: 1;
+  margin: 4px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  color: white;
+  transition: 0.3s;
+}
+
+.btn-view { background: #3b82f6; }
+.btn-edit { background: #10b981; }
+.btn-delete { background: #ef4444; }
+
+.btn-view:hover { background: #2563eb; }
+.btn-edit:hover { background: #047857; }
+.btn-delete:hover { background: #b91c1c; }
+
+/* ------------------------------
+   EMPTY MESSAGE
+------------------------------ */
+.empty-message {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 18px;
+  color: #777;
+}

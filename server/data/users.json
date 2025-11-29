@@ -1,0 +1,13 @@
+[
+  { "username": "admin", "password": "admin123", "role": "admin" },
+  { "username": "karan", "password": "student123", "role": "student" },
+  { "username": "sahil", "password": "student123", "role": "student" },
+  { "username": "niti", "password": "student123", "role": "student" },
+  { "username": "aditya", "password": "student123", "role": "student" },
+  { "username": "vinit", "password": "student123", "role": "student" },
+  { "username": "shreyash", "password": "student123", "role": "student" },
+  { "username": "krinal", "password": "student123", "role": "student" }
+
+
+
+]
